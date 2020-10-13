@@ -1,4 +1,5 @@
 import discord
+import requests
 
 client = discord.Client()
 prefix = ';'
@@ -20,6 +21,7 @@ class HiyobiBot(discord.Client):
             embed = discord.Embed(title=':ticket: HiyobiBot 도움말', color=0xababab)
             embed.set_thumbnail(url=thumbnail)
             embed.add_field(name=' - '+prefix+'정보 [N]', value='망가 정보를 출력합니다.', inline=True)
+            embed.add_field(name=' - ' + prefix + '정보 [N]', value='망가 정보를 출력합니다.', inline=False)
 
             await channel.send(embed=embed)
             return None
@@ -29,4 +31,4 @@ class HiyobiBot(discord.Client):
 
 if __name__ == '__main__':
     client = HiyobiBot()
-    client.run('NzY1NTU3MTM3ODMyNTQyMjA4.X4WipQ.t6XPIzTbgvOOSqVW6M0xbTkJINE')
+    client.run(process.env.TOKEN)
