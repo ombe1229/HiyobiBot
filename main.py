@@ -5,6 +5,7 @@ import os
 
 
 bot = commands.Bot(command_prefix=';')
+prefix = ';'
 thumbnail = 'https://i.imgur.com/GKPAp4q.png'
 
 
