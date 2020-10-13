@@ -20,8 +20,7 @@ class HiyobiBot(discord.Client):
         if message.content == prefix+'help':
             embed = discord.Embed(title=':ticket: HiyobiBot 도움말', color=0xababab)
             embed.set_thumbnail(url=thumbnail)
-            embed.add_field(name=' - '+prefix+'정보 [N]', value='망가 정보를 출력합니다.', inline=True)
-            embed.add_field(name=' - ' + prefix + '정보 [N]', value='망가 정보를 출력합니다.', inline=False)
+            embed.add_field(name=' - ' + prefix + '정보 [N]', value='망가 정보를 불러옵니다.', inline=True)
 
             await channel.send(embed=embed)
             return None
@@ -31,4 +30,4 @@ class HiyobiBot(discord.Client):
 
 if __name__ == '__main__':
     client = HiyobiBot()
-    client.run(process.env.TOKEN)
+    client.run(os.environ['TOKEN'])
