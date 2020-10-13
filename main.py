@@ -5,7 +5,6 @@ import os
 
 
 bot = commands.Bot(command_prefix=';')
-prefix = ';'
 thumbnail = 'https://i.imgur.com/GKPAp4q.png'
 
 
@@ -17,9 +16,9 @@ async def on_ready():
 
 @bot.command()
 async def help(ctx):
-    embed = discord.Embed(title=':ticket: HiyobiBot 도움말', color=0xababab)
+    embed = discord.Embed(title=':ticket: HiyobiBot 명령어 목록', color=0xababab)
     embed.set_thumbnail(url=thumbnail)
-    embed.add_field(name=' - ' + prefix + '정보 [N]', value='망가 정보를 불러옵니다.', inline=True)
+    embed.add_field(name=' - ;정보 [N]', value='망가 정보를 불러옵니다.', inline=True)
 
     await ctx.send(embed=embed)
 
