@@ -20,6 +20,6 @@ async def help(ctx):
     embed.set_thumbnail(url=thumbnail)
     embed.add_field(name=' - ' + prefix + '정보 [N]', value='망가 정보를 불러옵니다.', inline=True)
 
-    await ctx.send(embed)
+    await ctx.send(embed=embed)
 
 bot.run(os.environ['token'])
