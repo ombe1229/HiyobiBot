@@ -10,9 +10,7 @@ thumbnail = 'https://i.imgur.com/GKPAp4q.png'
 
 @bot.event
 async def on_ready():
-    print('히요비봇 온라인')
-    game = discord.Game(';help')
-    await bot.change_presence(status=discord.Status.online, activity=game)
+    await bot.change_presence(status=discord.Status.online, activity=discord.Game(';help'))
 
 @bot.command()
 async def help(ctx):
