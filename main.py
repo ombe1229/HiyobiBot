@@ -1,5 +1,6 @@
 import discord
 import requests
+import os
 
 client = discord.Client()
 prefix = ';'
@@ -30,4 +31,4 @@ class HiyobiBot(discord.Client):
 
 if __name__ == '__main__':
     client = HiyobiBot()
-    client.run(os.environ['TOKEN'])
+    client.run(os.environ['token'])
