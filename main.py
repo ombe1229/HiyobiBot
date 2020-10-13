@@ -12,11 +12,7 @@ class HiyobiBot(discord.Client):
         game = discord.Game(';help')
         await client.change_presence(status=discord.Status.online, activity=game)
 
-    @bot.command()
-    async def test(ctx, arg):
-        await ctx.send(arg)
-
-    async def on_message(self, message):
+    async def on_message(self, message, args):
         channel = message.channel
         args = message.content.s
 
