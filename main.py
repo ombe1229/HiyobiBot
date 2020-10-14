@@ -19,7 +19,7 @@ async def on_ready():
 async def 도움말(ctx):
     embed = discord.Embed(title=':ticket: HiyobiBot 명령어 목록', color=0xababab)
     embed.set_thumbnail(url=thumbnail)
-    embed.add_field(name=' - ;정보 [N]', value='망가 정보를 불러옵니다.', inline=True)
+    embed.add_field(name=';정보 [N]', value='망가 정보를 불러옵니다.', inline=True)
     await ctx.send(embed=embed)
 
 
@@ -27,7 +27,7 @@ async def 도움말(ctx):
 async def 명령어(ctx):
     embed = discord.Embed(title=':ticket: HiyobiBot 명령어 목록', color=0xababab)
     embed.set_thumbnail(url=thumbnail)
-    embed.add_field(name=' - ;정보 [N]', value='망가 정보를 불러옵니다.', inline=True)
+    embed.add_field(name=';정보 [N]', value='망가 정보를 불러옵니다.', inline=True)
     await ctx.send(embed=embed)
 
 
