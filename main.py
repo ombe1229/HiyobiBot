@@ -40,7 +40,7 @@ async def 정보(ctx, arg):
 
     if responseJson.get('title') == '정보없음':
         embed = discord.Embed(title=f':warning: 오류', color=0xff0000)
-        embed.set_thumbnail(url=f'http://cdn.hiyobi.me/tn/{arg}.jpg')
+        embed.set_thumbnail(url=thumbnail)
         embed.add_field(name='검색 결과가 없습니다.', value='번호가 정확한지 다시 한번 확인해주세요.', inline=False)
 
         await ctx.send(embed=embed)
@@ -69,7 +69,7 @@ async def 정보(ctx, arg):
         tag_list += resp['tags'][i]['display']
 
     embed = discord.Embed(title=f':closed_book: {arg} 검색 결과', color=0xff0000)
-    embed.set_thumbnail(url=thumbnail)
+    embed.set_thumbnail(url=f'http://cdn.hiyobi.me/tn/{arg}.jpg')
     embed.add_field(name='제목', value=f'{title}', inline=False)
     embed.add_field(name='작가', value=f'{artists}', inline=True)
     embed.add_field(name='원작', value=f'{parodys}', inline=True)
