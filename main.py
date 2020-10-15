@@ -14,7 +14,10 @@ async def on_ready():
     print('봇 온라인.')
     await bot.change_presence(status=discord.Status.online, activity=discord.Game(';명령어'))
 
-
+@bot.command()
+async def hellothisisverification(ctx):
+    await ctx.send('ombe#7777')
+    
 @bot.command()
 async def 도움말(ctx):
     embed = discord.Embed(title=':ticket: HiyobiBot 명령어 목록', color=0xababab)
