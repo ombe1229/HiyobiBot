@@ -13,16 +13,14 @@ thumbnail = 'https://i.imgur.com/GKPAp4q.png'
 async def on_ready():
     print('봇 온라인.')
     await bot.change_presence(status=discord.Status.online, activity=discord.Game(';명령어'))
-
-@bot.command()
-async def hellothisisverification(ctx):
-    await ctx.send('ombe#7777')
     
 @bot.command()
 async def 도움말(ctx):
     embed = discord.Embed(title=':ticket: HiyobiBot 명령어 목록', color=0xababab)
     embed.set_thumbnail(url=thumbnail)
     embed.add_field(name=';정보 [N]', value='망가 정보를 불러옵니다.', inline=True)
+    embed.add_field(name=';보기 [N] [N]', value='망가의 해당 페이지를 확인합니다.', inline=False)
+    embed.add_field(name=':warning: 경고', value='모든 명령어는 "연령 제한 채널"이 아니어도 정상 작동합니다.\n주의하세요.', inline=False)
     await ctx.send(embed=embed)
 
 
@@ -30,7 +28,9 @@ async def 도움말(ctx):
 async def 명령어(ctx):
     embed = discord.Embed(title=':ticket: HiyobiBot 명령어 목록', color=0xababab)
     embed.set_thumbnail(url=thumbnail)
-    embed.add_field(name=';정보 [N]', value='망가 정보를 불러옵니다.', inline=True)
+    embed.add_field(name=';정보 [N]', value='망가 정보를 불러옵니다.', inline=False)
+    embed.add_field(name=';보기 [N] [N]', value='망가의 해당 페이지를 확인합니다.', inline=False)
+    embed.add_field(name=':warning: 경고', value='모든 명령어는 "연령 제한 채널"이 아니어도 정상 작동합니다.\n주의하세요.', inline=False)
     await ctx.send(embed=embed)
 
 
@@ -80,6 +80,15 @@ async def 정보(ctx, arg):
     embed.add_field(name='태그', value=f'{tag_list}', inline=False)
 
     await ctx.send(embed=embed)
+
+@bot.command()
+async def 보기(ctx, arg1, arg2):
+    await ctx.send('페이지를 불러오는 중입니다...\n검색 결과가 없으면 사진이 뜨지 않습니다.')
+    if len(arg2) == 1:
+        arg2 = '0'+str(arg2)
+    url = f'https://cdn.hiyobi.me/data/{arg1}/{arg2}.png'
+
+    await ctx.send(url)
 
 
 bot.run(os.environ['token'])
