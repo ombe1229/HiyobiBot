@@ -13,7 +13,7 @@ thumbnail = 'https://i.imgur.com/GKPAp4q.png'
 async def on_ready():
     print('봇 온라인.')
     await bot.change_presence(status=discord.Status.online, activity=discord.Game(';명령어'))
-    
+
 @bot.command()
 async def 도움말(ctx):
     embed = discord.Embed(title=':ticket: HiyobiBot 명령어 목록', color=0xababab)
@@ -54,22 +54,35 @@ async def 정보(ctx, arg):
 
     title = responseJson.get('title')
 
-    artists = resp['artists'][0]['display']
-    parodys = resp['parodys'][0]['display']
+    try:
+        artists = resp['artists'][0]['display']
+    except:
+        artists = '없음'
 
-    characters = resp['characters']
-    character_list = ''
-    for i in range(len(characters)):
-        if i != 0:
-            character_list += ', '
-        character_list += resp['characters'][i]['display']
+    try:
+        parodys = resp['parodys'][0]['display']
+    except:
+        parodys = '없음'
 
-    tags = resp['tags']
-    tag_list = ''
-    for i in range(len(tags)):
-        if i != 0:
-            tag_list += ', '
-        tag_list += resp['tags'][i]['display']
+    try:
+        characters = resp['characters']
+        character_list = ''
+        for i in range(len(characters)):
+            if i != 0:
+                character_list += ', '
+            character_list += resp['characters'][i]['display']
+    except:
+        character_list = '없음'
+
+    try:
+        tags = resp['tags']
+        tag_list = ''
+        for i in range(len(tags)):
+            if i != 0:
+                tag_list += ', '
+            tag_list += resp['tags'][i]['display']
+    except:
+        tag_list = '없음'
 
     embed = discord.Embed(title=f':closed_book: {arg} 검색 결과', color=0xff0000)
     embed.set_thumbnail(url=f'http://cdn.hiyobi.me/tn/{arg}.jpg')
