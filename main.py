@@ -18,7 +18,8 @@ async def on_ready():
 async def 도움말(ctx):
     embed = discord.Embed(title=':ticket: HiyobiBot 명령어 목록', color=0xababab)
     embed.set_thumbnail(url=thumbnail)
-    embed.add_field(name=';정보 [N]', value='망가 정보를 불러옵니다.', inline=True)
+    embed.add_field(name=';정보 [N]', value='망가 정보를 불러옵니다.', inline=False)
+    embed.add_field(name=';최신', value='최신 망가 10개를 불러옵니다.', inline=False)
     embed.add_field(name=':warning: 경고', value='모든 명령어는 "연령 제한 채널"이 아니어도 정상 작동합니다.\n주의하세요.', inline=False)
     await ctx.send(embed=embed)
 
@@ -28,6 +29,7 @@ async def 명령어(ctx):
     embed = discord.Embed(title=':ticket: HiyobiBot 명령어 목록', color=0xababab)
     embed.set_thumbnail(url=thumbnail)
     embed.add_field(name=';정보 [N]', value='망가 정보를 불러옵니다.', inline=False)
+    embed.add_field(name=';최신', value='최신 망가 10개를 불러옵니다.', inline=False)
     embed.add_field(name=':warning: 경고', value='모든 명령어는 "연령 제한 채널"이 아니어도 정상 작동합니다.\n주의하세요.', inline=False)
     await ctx.send(embed=embed)
 
@@ -80,6 +82,31 @@ async def 정보(ctx, arg):
     embed.add_field(name='태그', value=f'{tag_list}', inline=False)
 
     await ctx.send(embed=embed)
+
+@bot.command()
+async def 최신(ctx):
+    await ctx.send('정보를 불러오는 중입니다...')
+
+    data = requests.get('https://api.hiyobi.me/list')
+    resp = data.json()
+
+    embed = discord.Embed(title=f':scroll: 최신 망가 리스트', color=0xff0000)
+    embed.set_thumbnail(url=thumbnail)
+
+    for i in range(9):
+        title = resp['list'][i]['title']
+        id = resp['list'][i]['id']
+        try:
+            artists = resp['list'][i]['artists'][0]['display']
+        except:
+            artists = '없음'
+
+        embed.add_field(name=f'{title}', value=f'작가 : {artists}\n번호 : {id}', inline=False)
+
+    await ctx.send(embed=embed)
+
+
+
 
 
 bot.run(os.environ['token'])
