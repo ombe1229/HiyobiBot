@@ -157,7 +157,9 @@ async def 페이지(ctx, page):
 
     await ctx.send(embed=embed)
 
-
+@bot.command()
+async def 초대(ctx):
+    await ctx.send('https://discord.com/oauth2/authorize?client_id=765557137832542208&scope=bot&permissions=2146954615')
 
 
 bot.run(os.environ['token'])
