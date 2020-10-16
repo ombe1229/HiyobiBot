@@ -20,6 +20,8 @@ async def 도움말(ctx):
     embed.set_thumbnail(url=thumbnail)
     embed.add_field(name=';정보 N', value='망가 정보를 불러옵니다.', inline=False)
     embed.add_field(name=';최신', value='최신 망가 10개를 불러옵니다.', inline=False)
+    embed.add_field(name=';페이지 N', value='최신 망가 리스트 중 N번째 페이지를 불러옵니다.', inline=False)
+    embed.add_field(name=';초대', value='HiyobiBot 초대 링크를 불러옵니다.', inline=False)
     embed.add_field(name=':warning: 경고', value='모든 명령어는 "연령 제한 채널"이 아니어도 정상 작동합니다.\n주의하세요.', inline=False)
     await ctx.send(embed=embed)
 
@@ -30,6 +32,8 @@ async def 명령어(ctx):
     embed.set_thumbnail(url=thumbnail)
     embed.add_field(name=';정보 N', value='망가 정보를 불러옵니다.', inline=False)
     embed.add_field(name=';최신', value='최신 망가 10개를 불러옵니다.', inline=False)
+    embed.add_field(name=';페이지 N', value='최신 망가 리스트 중 N번째 페이지를 불러옵니다.', inline=False)
+    embed.add_field(name=';초대', value='HiyobiBot 초대 링크를 불러옵니다.', inline=False)
     embed.add_field(name=':warning: 경고', value='모든 명령어는 "연령 제한 채널"이 아니어도 정상 작동합니다.\n주의하세요.', inline=False)
     await ctx.send(embed=embed)
 
