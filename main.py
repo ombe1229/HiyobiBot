@@ -18,7 +18,7 @@ async def on_ready():
 async def 도움말(ctx):
     embed = discord.Embed(title=':ticket: HiyobiBot 명령어 목록', color=0xababab)
     embed.set_thumbnail(url=thumbnail)
-    embed.add_field(name=';정보 [N]', value='망가 정보를 불러옵니다.', inline=False)
+    embed.add_field(name=';정보 N', value='망가 정보를 불러옵니다.', inline=False)
     embed.add_field(name=';최신', value='최신 망가 10개를 불러옵니다.', inline=False)
     embed.add_field(name=':warning: 경고', value='모든 명령어는 "연령 제한 채널"이 아니어도 정상 작동합니다.\n주의하세요.', inline=False)
     await ctx.send(embed=embed)
@@ -28,7 +28,7 @@ async def 도움말(ctx):
 async def 명령어(ctx):
     embed = discord.Embed(title=':ticket: HiyobiBot 명령어 목록', color=0xababab)
     embed.set_thumbnail(url=thumbnail)
-    embed.add_field(name=';정보 [N]', value='망가 정보를 불러옵니다.', inline=False)
+    embed.add_field(name=';정보 N', value='망가 정보를 불러옵니다.', inline=False)
     embed.add_field(name=';최신', value='최신 망가 10개를 불러옵니다.', inline=False)
     embed.add_field(name=':warning: 경고', value='모든 명령어는 "연령 제한 채널"이 아니어도 정상 작동합니다.\n주의하세요.', inline=False)
     await ctx.send(embed=embed)
@@ -36,6 +36,19 @@ async def 명령어(ctx):
 
 @bot.command()
 async def 정보(ctx, arg):
+    '''
+        if page == None:
+            embed = discord.Embed(title=':bulb: 정보 명령어 사용 방법',description=';정보 N\n해당 망가의 정보를 불러옵니다.\nex) ;정보 1629336', color=0xff0000)
+            embed.set_thumbnail(url=thumbnail)
+
+            await ctx.send(embed=embed)
+            return None
+        '''
+
+    if not arg.isdigit():
+        await ctx.send('숫자를 입력해주세요.')
+        return None
+
     await ctx.send('정보를 검색하는 중입니다...')
 
     response = urlopen(f'https://api.hiyobi.me/gallery/{arg}').read()
@@ -87,7 +100,7 @@ async def 정보(ctx, arg):
 async def 최신(ctx):
     await ctx.send('정보를 불러오는 중입니다...')
 
-    data = requests.get('https://api.hiyobi.me/list')
+    data = requests.get(f'https://api.hiyobi.me/list')
     resp = data.json()
 
     embed = discord.Embed(title=f':scroll: 최신 망가 리스트', color=0xff0000)
@@ -105,6 +118,40 @@ async def 최신(ctx):
 
     await ctx.send(embed=embed)
 
+@bot.command()
+async def 페이지(ctx, page):
+    '''
+    if page == None:
+        embed = discord.Embed(title=':bulb: 페이지 명령어 사용 방법',description=';페이지 N\n최신 망가 리스트 중 N번째 페이지를 불러옵니다.\nex) ;페이지 2', color=0xff0000)
+        embed.set_thumbnail(url=thumbnail)
+
+        await ctx.send(embed=embed)
+        return None
+    '''
+
+    if not page.isdigit():
+        await ctx.send('숫자를 입력해주세요.')
+        return None
+
+    await ctx.send('정보를 불러오는 중입니다...')
+
+    data = requests.get(f'https://api.hiyobi.me/list/{page}')
+    resp = data.json()
+
+    embed = discord.Embed(title=f':scroll: 최신 망가 리스트 - {page}페이지', color=0xff0000)
+    embed.set_thumbnail(url=thumbnail)
+
+    for i in range(9):
+        title = resp['list'][i]['title']
+        id = resp['list'][i]['id']
+        try:
+            artists = resp['list'][i]['artists'][0]['display']
+        except:
+            artists = '없음'
+
+        embed.add_field(name=f'{title}', value=f'작가 : {artists}\n번호 : {id}', inline=False)
+
+    await ctx.send(embed=embed)
 
 
 
