@@ -168,10 +168,10 @@ async def 페이지(ctx, page):
 
 @bot.command()
 async def 초대(ctx):
-    await ctx.send(os.environ['token'])
+    await ctx.send('https://discord.com/oauth2/authorize?client_id=765557137832542208&scope=bot&permissions=2146954615')
 
 
-bot.run('NzY1NTU3MTM3ODMyNTQyMjA4.X4WipQ.I2m8RG7rsw9_Z63cPAMv7yeD58o')
+bot.run(os.environ['token'])
 
 
 '''
