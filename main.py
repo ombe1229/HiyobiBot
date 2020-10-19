@@ -3,7 +3,9 @@ from discord.ext import commands, tasks
 import json
 import requests
 from urllib.request import urlopen
+from bs4 import BeautifulSoup
 import os
+
 
 bot = commands.Bot(command_prefix=';')
 thumbnail = 'https://i.imgur.com/GKPAp4q.png'
@@ -55,7 +57,14 @@ async def 정보(ctx, arg):
 
     await ctx.send('정보를 검색하는 중입니다...')
 
-    response = urlopen(f'https://api.hiyobi.me/gallery/{arg}').read()
+    try:
+        response = urlopen(f'https://api.hiyobi.me/gallery/{arg}').read()
+    except:
+        embed = discord.Embed(title=f':warning: 오류',description='오류가 발생했습니다.\n지속적으로 오류가 발생할 경우 ombe#7777으로 문의해주세요.', color=0xff0000)
+        embed.set_thumbnail(url=thumbnail)
+
+        await ctx.send(embed=embed)
+        return None
     responseJson = json.loads(response)
 
     if responseJson.get('title') == '정보없음':
@@ -89,7 +98,7 @@ async def 정보(ctx, arg):
             tag_list += ', '
         tag_list += resp['tags'][i]['display']
 
-    embed = discord.Embed(title=f':closed_book: {arg} 검색 결과', color=0xff0000)
+    embed = discord.Embed(title=f':closed_book: {arg} 검색 결과', url=f'https://hiyobi.me/info/{arg}', color=0xff0000)
     embed.set_thumbnail(url=f'http://cdn.hiyobi.me/tn/{arg}.jpg')
     embed.add_field(name='제목', value=f'{title}', inline=False)
     embed.add_field(name='작가', value=f'{artists}', inline=True)
@@ -107,7 +116,7 @@ async def 최신(ctx):
     data = requests.get(f'https://api.hiyobi.me/list')
     resp = data.json()
 
-    embed = discord.Embed(title=f':scroll: 최신 망가 리스트', color=0xff0000)
+    embed = discord.Embed(title=f':scroll: 최신 망가 리스트',url='https://hiyobi.me/', color=0xff0000)
     embed.set_thumbnail(url=thumbnail)
 
     for i in range(9):
@@ -125,12 +134,11 @@ async def 최신(ctx):
 @bot.command()
 async def 페이지(ctx, page):
     '''
-    if page == None:
-        embed = discord.Embed(title=':bulb: 페이지 명령어 사용 방법',description=';페이지 N\n최신 망가 리스트 중 N번째 페이지를 불러옵니다.\nex) ;페이지 2', color=0xff0000)
-        embed.set_thumbnail(url=thumbnail)
+    embed = discord.Embed(title=':bulb: 페이지 명령어 사용 방법', description=';페이지 N\n최신 망가 리스트 중 N번째 페이지를 불러옵니다.\nex) ;페이지 2', color=0xff0000)
+    embed.set_thumbnail(url=thumbnail)
 
-        await ctx.send(embed=embed)
-        return None
+    await ctx.send(embed=embed)
+    return None
     '''
 
     if not page.isdigit():
@@ -142,7 +150,7 @@ async def 페이지(ctx, page):
     data = requests.get(f'https://api.hiyobi.me/list/{page}')
     resp = data.json()
 
-    embed = discord.Embed(title=f':scroll: 최신 망가 리스트 - {page}페이지', color=0xff0000)
+    embed = discord.Embed(title=f':scroll: 최신 망가 리스트 - {page}페이지',url=f'https://hiyobi.me/list/{page}', color=0xff0000)
     embed.set_thumbnail(url=thumbnail)
 
     for i in range(9):
@@ -157,9 +165,32 @@ async def 페이지(ctx, page):
 
     await ctx.send(embed=embed)
 
+
 @bot.command()
 async def 초대(ctx):
-    await ctx.send('https://discord.com/oauth2/authorize?client_id=765557137832542208&scope=bot&permissions=2146954615')
+    await ctx.send(os.environ['token'])
 
 
-bot.run(os.environ['token'])
+bot.run('NzY1NTU3MTM3ODMyNTQyMjA4.X4WipQ.I2m8RG7rsw9_Z63cPAMv7yeD58o')
+
+
+'''
+크롤링으로 불러오기 실패작
+
+@bot.command()
+async def 검색(ctx, arg1):
+    await ctx.send('리스트를 검색하는 중입니다...')
+
+    req = requests.get(f'https://hiyobi.me/search/{arg1}')
+    con = req.content
+    html = BeautifulSoup(con, "html.parser")
+
+    container = html.find("div", {"class":"container"})
+
+    result_list = container.find_all("div", {"class":"sc-jSFkmK jGLdVH row"})
+
+    for i in result_list:
+        title_table = i.find("div", {"class":"col-sm-12 col-md-9 p-1 pl-md-4"})
+        title = title_table.find("a", {"class":"sc-gKAblj boPkKw"}).text
+        print(title)
+'''
