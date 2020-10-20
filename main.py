@@ -2,7 +2,6 @@ import discord
 from discord.ext import commands, tasks
 import json
 import requests
-import aiohttp
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
 import os
@@ -61,25 +60,13 @@ async def 정보(ctx, arg):
         await ctx.send('숫자를 입력해주세요.')
         return None
 
-    searchingMessage = await ctx.send('정보를 검색하는 중입니다...')
+    waitMessage = await ctx.send('정보를 검색하는 중입니다...')
 
     url = f'https://api.hiyobi.me/gallery/{arg}'
     response = requests.get(url).json()
 
-    '''
-    try:
-        response = urlopen(f'https://api.hiyobi.me/gallery/{arg}').read()
-    except:
-        embed = discord.Embed(title=f':warning: 오류',description='오류가 발생했습니다.\n지속적으로 오류가 발생할 경우 ombe#7777으로 문의해주세요.', color=0xff0000)
-        embed.set_thumbnail(url=thumbnail)
-
-        await ctx.send(embed=embed)
-        return None
-    responseJson = json.loads(response)
-    '''
-
     if response['title'] == '정보없음':
-        embed = discord.Embed(title=f':warning: 오류', color=0xff0000)
+        embed = discord.Embed(title=':warning: 오류', color=0xff0000)
         embed.set_thumbnail(url=thumbnail)
         embed.add_field(name='검색 결과가 없습니다.', value='번호가 정확한지 다시 한번 확인해주세요.', inline=False)
 
@@ -89,7 +76,7 @@ async def 정보(ctx, arg):
     title = response['title']
     artists = [a['display'] for a in response['artists']]
     groups = [g['display'] for g in response['groups']]
-    parodys = [p['display'] for p in response['parodys']]
+    parody = [p['display'] for p in response['parody']]
     characters = [c['display'] for c in response['characters']]
     tags = [t['display'] for t in response['tags']]
 
@@ -97,8 +84,8 @@ async def 정보(ctx, arg):
         artists.append('없음')
     if not groups:
         groups.append('없음')
-    if not parodys:
-        parodys.append('없음')
+    if not parody:
+        parody.append('없음')
     if not characters:
         characters.append('없음')
     if not tags:
@@ -108,21 +95,21 @@ async def 정보(ctx, arg):
     embed.set_thumbnail(url=f'http://cdn.hiyobi.me/tn/{arg}.jpg')
     embed.add_field(name='작가', value=", ".join(artists), inline=False)
     embed.add_field(name='그룹', value=", ".join(groups), inline=False)
-    embed.add_field(name='원작', value=", ".join(parodys), inline=False)
+    embed.add_field(name='원작', value=", ".join(parody), inline=False)
     embed.add_field(name='캐릭터', value=", ".join(characters), inline=False)
     embed.add_field(name='태그', value=", ".join(tags), inline=False)
 
-    await searchingMessage.delete()
+    await waitMessage.delete()
     await ctx.send(embed=embed)
 
 @bot.command()
 async def 최신(ctx):
-    await ctx.send('정보를 불러오는 중입니다...')
+    waitMessage = await ctx.send('정보를 불러오는 중입니다...')
 
     data = requests.get(f'https://api.hiyobi.me/list')
     resp = data.json()
 
-    embed = discord.Embed(title=f':scroll: 최신 망가 리스트',url='https://hiyobi.me/', color=0xff0000)
+    embed = discord.Embed(title=f':scroll: 최신 망가 리스트', url='https://hiyobi.me/', color=0xff0000)
     embed.set_thumbnail(url=thumbnail)
 
     for i in range(9):
@@ -135,23 +122,16 @@ async def 최신(ctx):
 
         embed.add_field(name=f'{title}', value=f'작가 : {artists}\n번호 : {id}', inline=False)
 
+    await waitMessage.delete()
     await ctx.send(embed=embed)
 
 @bot.command()
 async def 페이지(ctx, page):
-    '''
-    embed = discord.Embed(title=':bulb: 페이지 명령어 사용 방법', description=';페이지 N\n최신 망가 리스트 중 N번째 페이지를 불러옵니다.\nex) ;페이지 2', color=0xff0000)
-    embed.set_thumbnail(url=thumbnail)
-
-    await ctx.send(embed=embed)
-    return None
-    '''
-
     if not page.isdigit():
         await ctx.send('숫자를 입력해주세요.')
         return None
 
-    await ctx.send('정보를 불러오는 중입니다...')
+    waitMessage = await ctx.send('정보를 불러오는 중입니다...')
 
     data = requests.get(f'https://api.hiyobi.me/list/{page}')
     resp = data.json()
@@ -169,6 +149,7 @@ async def 페이지(ctx, page):
 
         embed.add_field(name=f'{title}', value=f'작가 : {artists}\n번호 : {id}', inline=False)
 
+    await waitMessage.delete()
     await ctx.send(embed=embed)
 
 '''
@@ -195,6 +176,9 @@ async def 검색(ctx, arg1):
 @bot.command()
 async def 초대(ctx):
     await ctx.send('https://discord.com/oauth2/authorize?client_id=765557137832542208&scope=bot&permissions=2146954615')
+    embed = discord.Embed(title=':inbox_tray: HiyobiBot 초대 링크',url='https://discord.com/oauth2/authorize?client_id=765557137832542208&scope=bot&permissions=2146954615',description='위 링크를 눌러 HiyobiBot을 다른 서버에 초대할 수 있습니다.', color=0xff0000)
+    embed.set_thumbnail(url=thumbnail)
+    await ctx.send(embed=embed)
 
 
 bot.run(os.environ['token'])
