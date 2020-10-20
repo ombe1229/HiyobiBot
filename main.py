@@ -15,7 +15,6 @@ bot.remove_command('help')
 @bot.event
 async def on_ready():
     print('봇 온라인.')
-    print(bot.use)
     await bot.change_presence(status=discord.Status.online, activity=discord.Game(';명령어 | ombe#7777'))
 
 
