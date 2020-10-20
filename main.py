@@ -15,6 +15,7 @@ bot.remove_command('help')
 @bot.event
 async def on_ready():
     print('봇 온라인.')
+    print(bot.use)
     await bot.change_presence(status=discord.Status.online, activity=discord.Game(';명령어 | ombe#7777'))
 
 
@@ -26,6 +27,7 @@ async def help(ctx):
     embed.add_field(name=';최신', value='최신 망가 10개를 불러옵니다.', inline=False)
     embed.add_field(name=';페이지 N', value='최신 망가 리스트 중 N번째 페이지를 불러옵니다.', inline=False)
     embed.add_field(name=';초대', value='HiyobiBot 초대 링크를 불러옵니다.', inline=False)
+    embed.add_field(name=';지원', value='HiyobiBot 디스코드 서버 링크를 불러옵니다.', inline=False)
     embed.add_field(name=':warning: 경고', value='모든 명령어는 "연령 제한 채널"이 아니어도 정상 작동합니다.\n주의하세요.', inline=False)
     await ctx.send(embed=embed)
 
@@ -38,6 +40,7 @@ async def 도움말(ctx):
     embed.add_field(name=';최신', value='최신 망가 10개를 불러옵니다.', inline=False)
     embed.add_field(name=';페이지 N', value='최신 망가 리스트 중 N번째 페이지를 불러옵니다.', inline=False)
     embed.add_field(name=';초대', value='HiyobiBot 초대 링크를 불러옵니다.', inline=False)
+    embed.add_field(name=';지원', value='HiyobiBot 디스코드 서버 링크를 불러옵니다.', inline=False)
     embed.add_field(name=':warning: 경고', value='모든 명령어는 "연령 제한 채널"이 아니어도 정상 작동합니다.\n주의하세요.', inline=False)
     await ctx.send(embed=embed)
 
@@ -50,6 +53,7 @@ async def 명령어(ctx):
     embed.add_field(name=';최신', value='최신 망가 10개를 불러옵니다.', inline=False)
     embed.add_field(name=';페이지 N', value='최신 망가 리스트 중 N번째 페이지를 불러옵니다.', inline=False)
     embed.add_field(name=';초대', value='HiyobiBot 초대 링크를 불러옵니다.', inline=False)
+    embed.add_field(name=';지원', value='HiyobiBot 디스코드 서버 링크를 불러옵니다.', inline=False)
     embed.add_field(name=':warning: 경고', value='모든 명령어는 "연령 제한 채널"이 아니어도 정상 작동합니다.\n주의하세요.', inline=False)
     await ctx.send(embed=embed)
 
@@ -175,8 +179,13 @@ async def 검색(ctx, arg1):
 
 @bot.command()
 async def 초대(ctx):
-    await ctx.send('https://discord.com/oauth2/authorize?client_id=765557137832542208&scope=bot&permissions=2146954615')
     embed = discord.Embed(title=':inbox_tray: HiyobiBot 초대 링크',url='https://discord.com/oauth2/authorize?client_id=765557137832542208&scope=bot&permissions=2146954615',description='위 링크를 눌러 HiyobiBot을 다른 서버에 초대할 수 있습니다.', color=0xff0000)
+    embed.set_thumbnail(url=thumbnail)
+    await ctx.send(embed=embed)
+
+@bot.command()
+async def 지원(ctx):
+    embed = discord.Embed(title=':envelope: HiyobiBot 디스코드 서버',url='https://discord.gg/3zSTSNT',description='위 링크를 눌러 HiyobiBot 디스코드 서버에 들어갈 수 있습니다.', color=0xff0000)
     embed.set_thumbnail(url=thumbnail)
     await ctx.send(embed=embed)
 
