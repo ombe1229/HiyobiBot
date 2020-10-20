@@ -181,4 +181,4 @@ async def 초대(ctx):
     await ctx.send(embed=embed)
 
 
-bot.run('NzY1NTU3MTM3ODMyNTQyMjA4.X4WipQ.cZdK8US5CcSE5Uvxown4J0LuO2E')
+bot.run(os.environ['token'])
