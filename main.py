@@ -15,7 +15,7 @@ bot.remove_command('help')
 @bot.event
 async def on_ready():
     print('봇 온라인.')
-    await bot.change_presence(status=discord.Status.online, activity=discord.Game(f';명령어'))
+    await bot.change_presence(status=discord.Status.online, activity=discord.Game(';명령어 | ombe#7777'))
 
 
 @bot.command()
@@ -181,4 +181,4 @@ async def 초대(ctx):
     await ctx.send(embed=embed)
 
 
-bot.run(os.environ['token'])
+bot.run('NzY1NTU3MTM3ODMyNTQyMjA4.X4WipQ.cZdK8US5CcSE5Uvxown4J0LuO2E')
