@@ -79,7 +79,7 @@ async def 정보(ctx, arg):
     title = response['title']
     artists = [a['display'] for a in response['artists']]
     groups = [g['display'] for g in response['groups']]
-    parody = [p['display'] for p in response['parody']]
+    parody = [p['display'] for p in response['parodys']]
     characters = [c['display'] for c in response['characters']]
     tags = [t['display'] for t in response['tags']]
 
