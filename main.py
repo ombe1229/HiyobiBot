@@ -98,7 +98,7 @@ async def 최신(ctx):
         except:
             artists = '없음'
 
-        embed.add_field(name=f'{title}', value=f'작가 : {artists}     번호 : {id}', inline=False)
+        embed.add_field(name=f'{title}', value=f'작가 : {artists}     |    번호 : {id}', inline=False)
 
     try:
         await waitMessage.edit(embed=embed)
@@ -130,7 +130,7 @@ async def 페이지(ctx, page):
         except:
             artists = '없음'
 
-        embed.add_field(name=f'{title}', value=f'작가 : {artists}     번호 : {id}', inline=False)
+        embed.add_field(name=f'{title}', value=f'작가 : {artists}     |    번호 : {id}', inline=False)
 
     try:
         await waitMessage.edit(embed=embed)
