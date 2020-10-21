@@ -109,15 +109,17 @@ async def 정보(ctx, arg):
 async def 최신(ctx):
     waitMessage = await ctx.send('정보를 불러오는 중입니다...')
 
-    data = requests.get(f'https://api.hiyobi.me/list')
+    data = requests.get('https://api.hiyobi.me/list')
     resp = data.json()
 
-    embed = discord.Embed(title=f':scroll: 최신 망가 리스트', url='https://hiyobi.me/', color=0xff0000)
+    embed = discord.Embed(title=':scroll: 최신 망가 리스트', url='https://hiyobi.me/', color=0xff0000)
     embed.set_thumbnail(url=thumbnail)
 
     for i in range(9):
-        title = resp['list'][i]['title']
         id = resp['list'][i]['id']
+        title = resp['list'][i]['title']
+        if title == '':
+            title = '없음'
         try:
             artists = resp['list'][i]['artists'][0]['display']
         except:
@@ -126,7 +128,14 @@ async def 최신(ctx):
         embed.add_field(name=f'{title}', value=f'작가 : {artists}\n번호 : {id}', inline=False)
 
     await waitMessage.delete()
-    await ctx.send(embed=embed)
+    try:
+        await ctx.send(embed=embed)
+    except:
+        embed = discord.Embed(title=':warning: 오류', color=0xff0000)
+        embed.set_thumbnail(url=thumbnail)
+        embed.add_field(name='오류가 발생했습니다.', value='지속적으로 오류 발생 시 ombe#7777으로 문의해주세요.', inline=False)
+
+        await ctx.send(embed=embed)
 
 @bot.command()
 async def 페이지(ctx, page):
@@ -143,8 +152,10 @@ async def 페이지(ctx, page):
     embed.set_thumbnail(url=thumbnail)
 
     for i in range(9):
-        title = resp['list'][i]['title']
         id = resp['list'][i]['id']
+        title = resp['list'][i]['title']
+        if title == '':
+            title = '없음'
         try:
             artists = resp['list'][i]['artists'][0]['display']
         except:
@@ -153,7 +164,14 @@ async def 페이지(ctx, page):
         embed.add_field(name=f'{title}', value=f'작가 : {artists}\n번호 : {id}', inline=False)
 
     await waitMessage.delete()
-    await ctx.send(embed=embed)
+    try:
+        await ctx.send(embed=embed)
+    except:
+        embed = discord.Embed(title=':warning: 오류', color=0xff0000)
+        embed.set_thumbnail(url=thumbnail)
+        embed.add_field(name='오류가 발생했습니다.', value='지속적으로 오류 발생 시 ombe#7777으로 문의해주세요.', inline=False)
+
+        await ctx.send(embed=embed)
 
 '''
 @bot.command()
