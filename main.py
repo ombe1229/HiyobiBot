@@ -156,7 +156,11 @@ async def 보기(ctx, num, page):
     except:
         await waitMessage.edit(embed=Embeds.Error)
         return None
-    img = f'https://cdn.hiyobi.me/data/{num}/{resp[int(page)]["name"]}'
+    try:
+        img = f'https://cdn.hiyobi.me/data/{num}/{resp[int(page)]["name"]}'
+    except:
+        await waitMessage.edit(embed=Embeds.WrongNum)
+        return None
 
     await waitMessage.delete()
     await ctx.send(img)

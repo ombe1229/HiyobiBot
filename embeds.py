@@ -34,6 +34,9 @@ class Embeds:
     PlzInputNum = discord.Embed(title=':warning: 오류',description='숫자를 입력해주세요.', color=0xff0000)
     PlzInputNum.set_thumbnail(url=thumbnail)
 
+    WrongNum = discord.Embed(title=':warning: 오류', description='해당 페이지를 찾을 수 없습니다.', color=0xff0000)
+    WrongNum.set_thumbnail(url=thumbnail)
+
 
     Invite = discord.Embed(title=':inbox_tray: HiyobiBot 초대 링크', url='https://discord.com/oauth2/authorize?client_id=765557137832542208&scope=bot&permissions=2146954615', description='위 링크를 눌러 HiyobiBot을 다른 서버에 초대할 수 있습니다.', color=0xff0000)
     Invite.set_thumbnail(url=thumbnail)
