@@ -35,14 +35,14 @@ async def 명령어(ctx):
 
 
 @bot.command()
-async def 정보(ctx, arg):
-    if not arg.isdigit():
+async def 정보(ctx, num):
+    if not num.isdigit():
         await ctx.send(embed=Embeds.PlzInputNum)
         return None
 
     waitMessage = await ctx.send(embed=Embeds.Wait)
 
-    url = f'https://api.hiyobi.me/gallery/{arg}'
+    url = f'https://api.hiyobi.me/gallery/{num}'
     response = requests.get(url).json()
 
     if response['title'] == '정보없음':
@@ -67,8 +67,8 @@ async def 정보(ctx, arg):
     if not tags:
         tags.append('없음')
 
-    embed = discord.Embed(title=f'{title}', url=f'https://hiyobi.me/info/{arg}', color=0xff0000)
-    embed.set_thumbnail(url=f'http://cdn.hiyobi.me/tn/{arg}.jpg')
+    embed = discord.Embed(title=f'{title}', url=f'https://hiyobi.me/info/{num}', color=0xff0000)
+    embed.set_thumbnail(url=f'http://cdn.hiyobi.me/tn/{num}.jpg')
     embed.add_field(name='작가', value=", ".join(artists), inline=False)
     embed.add_field(name='그룹', value=", ".join(groups), inline=False)
     embed.add_field(name='원작', value=", ".join(parody), inline=False)
@@ -137,6 +137,29 @@ async def 페이지(ctx, page):
     except:
         await waitMessage.edit(embed=Embeds.Error)
 
+
+@bot.command()
+async def 검색(ctx, *tag):
+    await ctx.send(embed=Embeds.NotReady)
+
+@bot.command()
+async def 보기(ctx, num, page):
+    if not num.isdigit() or not page.isdigit():
+        await ctx.send(embed=Embeds.PlzInputNum)
+        return None
+
+    waitMessage = await ctx.send(embed=Embeds.Wait)
+
+    data = requests.get(f'https://cdn.hiyobi.me/data/json/{str(num)}_list.json')
+    try:
+        resp = data.json()
+    except:
+        await waitMessage.edit(embed=Embeds.Error)
+        return None
+    img = f'https://cdn.hiyobi.me/data/{num}/{resp[int(page)]["name"]}'
+
+    await waitMessage.delete()
+    await ctx.send(img)
 
 @bot.command()
 async def 초대(ctx):
