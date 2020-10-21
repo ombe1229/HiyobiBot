@@ -112,7 +112,7 @@ async def 최신(ctx):
     data = requests.get('https://api.hiyobi.me/list')
     resp = data.json()
 
-    embed = discord.Embed(title=':scroll: 최신 망가 리스트', url='https://hiyobi.me/', color=0xff0000)
+    embed = discord.Embed(title=':scroll: 히요비 최신 리스트', url='https://hiyobi.me/', color=0xff0000)
     embed.set_thumbnail(url=thumbnail)
 
     for i in range(9):
@@ -148,7 +148,7 @@ async def 페이지(ctx, page):
     data = requests.get(f'https://api.hiyobi.me/list/{page}')
     resp = data.json()
 
-    embed = discord.Embed(title=f':scroll: 최신 망가 리스트 - {page}페이지',url=f'https://hiyobi.me/list/{page}', color=0xff0000)
+    embed = discord.Embed(title=f':scroll: 히요비 최신 리스트 - {page}페이지',url=f'https://hiyobi.me/list/{page}', color=0xff0000)
     embed.set_thumbnail(url=thumbnail)
 
     for i in range(9):
