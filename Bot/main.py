@@ -1,11 +1,9 @@
 import discord
-from discord.ext import commands, tasks
-import json
+from discord.ext import commands
 import requests
-import asyncio
-from bs4 import BeautifulSoup
+import aiohttp
+from Bot.embeds import Embeds
 import os
-from embeds import Embeds
 
 
 bot = commands.Bot(command_prefix=';')
@@ -117,7 +115,7 @@ async def 페이지(ctx, page):
     data = requests.get(f'https://api.hiyobi.me/list/{page}')
     resp = data.json()
 
-    embed = discord.Embed(title=f':scroll: 히요비 최신 리스트 - {page}페이지',url=f'https://hiyobi.me/list/{page}', color=0xff0000)
+    embed = discord.Embed(title=f':scroll: 히요비 최신 리스트 - {page}페이지', url=f'https://hiyobi.me/list/{page}', color=0xff0000)
     embed.set_thumbnail(url=thumbnail)
 
     for i in range(9):
@@ -140,7 +138,29 @@ async def 페이지(ctx, page):
 
 @bot.command()
 async def 검색(ctx, *tag):
-    await ctx.send(embed=Embeds.NotReady)
+    waitMessage = await ctx.send(embed=Embeds.NotReady)
+
+
+@bot.command()
+async def 표지(ctx, num):
+    if not num.isdigit():
+        await ctx.send(embed=Embeds.PlzInputNum)
+        return None
+
+    waitMessage = await ctx.send(embed=Embeds.Wait)
+
+    url = f'https://api.hiyobi.me/gallery/{num}'
+    response = requests.get(url).json()
+
+    if response['title'] == '정보없음':
+        await waitMessage.edit(embed=Embeds.NoResult)
+        return None
+
+    embed = discord.Embed()
+    embed.set_image(url=f'http://cdn.hiyobi.me/tn/{num}.jpg')
+
+    await waitMessage.edit(embed=embed)
+
 
 @bot.command()
 async def 보기(ctx, num, page):
@@ -162,8 +182,10 @@ async def 보기(ctx, num, page):
         await waitMessage.edit(embed=Embeds.WrongNum)
         return None
 
-    await waitMessage.delete()
-    await ctx.send(img)
+    embed = discord.Embed()
+    embed.set_image(url=img)
+
+    await waitMessage.edit(embed=embed)
 
 @bot.command()
 async def 초대(ctx):

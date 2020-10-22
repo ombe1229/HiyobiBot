@@ -13,6 +13,7 @@ class Embeds:
     Help.add_field(name=';최신', value='최신 망가 10개를 불러옵니다.', inline=False)
     Help.add_field(name=';페이지 N', value='최신 망가 리스트 중 N번째 페이지를 불러옵니다.', inline=False)
     Help.add_field(name=';검색 S', value='히요비에 S를 검색하여 나온 결과를 불러옵니다.', inline=False)
+    Help.add_field(name=';표지 N', value='N번 망가의 표지를 보여줍니다.', inline=False)
     Help.add_field(name=';보기 N N2', value='N번 망가의 N2페이지를 불러옵니다.', inline=False)
     Help.add_field(name=';초대', value='HiyobiBot 초대 링크를 불러옵니다.', inline=False)
     Help.add_field(name=';지원', value='HiyobiBot 디스코드 서버 링크를 불러옵니다.', inline=False)
