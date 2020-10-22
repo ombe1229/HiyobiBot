@@ -48,3 +48,14 @@ class Embeds:
 
     NotReady = discord.Embed(title=':hammer: 아직 개발 중인 기능입니다.', description='곧 완성될 예정이니 조금만 기다려주세요.', color=0xff0000)
     NotReady.set_thumbnail(url=thumbnail)
+
+
+class CreateEmbed:
+
+
+    def Error(self, e):
+        embed = discord.Embed(title=':warning: 오류', color=0xff0000)
+        embed.set_thumbnail(url=thumbnail)
+        embed.add_field(name='오류가 발생했습니다.', value='지속적으로 오류 발생 시 ombe#7777으로 문의해주세요.', inline=False)
+        embed.add_field(name='오류 코드', value=e, inline=False)
+        return embed

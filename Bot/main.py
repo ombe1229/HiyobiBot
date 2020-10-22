@@ -2,7 +2,8 @@ import discord
 from discord.ext import commands
 import requests
 import aiohttp
-from Bot.embeds import Embeds
+from Bot.etc import Embeds
+from Bot.etc import CreateEmbed
 import os
 
 
@@ -73,7 +74,10 @@ async def 정보(ctx, num):
     embed.add_field(name='캐릭터', value=", ".join(characters), inline=False)
     embed.add_field(name='태그', value=", ".join(tags), inline=False)
 
-    await waitMessage.edit(embed=embed)
+    try:
+        await waitMessage.edit(embed=embed)
+    except Exception as e:
+        await waitMessage.edit(embed=CreateEmbed.Error(e))
 
 
 @bot.command()
@@ -100,8 +104,8 @@ async def 최신(ctx):
 
     try:
         await waitMessage.edit(embed=embed)
-    except:
-        await waitMessage.edit(embed=Embeds.Error)
+    except Exception as e:
+        await waitMessage.edit(embed=CreateEmbed.Error(e))
 
 
 @bot.command()
@@ -132,8 +136,8 @@ async def 페이지(ctx, page):
 
     try:
         await waitMessage.edit(embed=embed)
-    except:
-        await waitMessage.edit(embed=Embeds.Error)
+    except Exception as e:
+        await waitMessage.edit(embed=CreateEmbed.Error(e))
 
 
 @bot.command()
@@ -159,7 +163,10 @@ async def 표지(ctx, num):
     embed = discord.Embed()
     embed.set_image(url=f'http://cdn.hiyobi.me/tn/{num}.jpg')
 
-    await waitMessage.edit(embed=embed)
+    try:
+        await waitMessage.edit(embed=embed)
+    except Exception as e:
+        await waitMessage.edit(embed=CreateEmbed.Error(e))
 
 
 @bot.command()
@@ -185,7 +192,11 @@ async def 보기(ctx, num, page):
     embed = discord.Embed()
     embed.set_image(url=img)
 
-    await waitMessage.edit(embed=embed)
+    try:
+        await waitMessage.edit(embed=embed)
+    except Exception as e:
+        await waitMessage.edit(embed=CreateEmbed.Error(e))
+
 
 @bot.command()
 async def 초대(ctx):
