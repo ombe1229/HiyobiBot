@@ -1,9 +1,9 @@
 import discord
 from discord.ext import commands
 import requests
-import aiohttp
 from Bot.etc import Embeds
 from Bot.etc import CreateEmbed
+import json
 import os
 
 
@@ -12,15 +12,15 @@ thumbnail = 'https://i.imgur.com/GKPAp4q.png'
 bot.remove_command('help')
 
 BASEURL = "https://api.koreanbots.dev"
-token = os.environ['dbltoken']
+#token = os.environ['dbltoken']
 serverCount = 21
 
 
 @bot.event
 async def on_ready():
-    response = requests.post(f'{BASEURL}/bots/servers', headers={"token":token, "Content-Type": "application/json"}, json={"servers": serverCount})
+#    response = requests.post(f'{BASEURL}/bots/servers', headers={"token":token, "Content-Type": "application/json"}, json={"servers": serverCount})
     print('봇 온라인.')
-    print(response.json())
+#    print(response.json())
     await bot.change_presence(status=discord.Status.online, activity=discord.Game(';명령어 | ombe#7777'))
 
 
@@ -80,10 +80,7 @@ async def 정보(ctx, num):
     embed.add_field(name='캐릭터', value=", ".join(characters), inline=False)
     embed.add_field(name='태그', value=", ".join(tags), inline=False)
 
-    try:
-        await waitMessage.edit(embed=embed)
-    except Exception as e:
-        await waitMessage.edit(embed=CreateEmbed.Error(e))
+    await waitMessage.edit(embed=embed)
 
 
 @bot.command()
@@ -184,11 +181,8 @@ async def 보기(ctx, num, page):
     waitMessage = await ctx.send(embed=Embeds.Wait)
 
     data = requests.get(f'https://cdn.hiyobi.me/data/json/{str(num)}_list.json')
-    try:
-        resp = data.json()
-    except:
-        await waitMessage.edit(embed=Embeds.Error)
-        return None
+    resp = data.json()
+
     try:
         img = f'https://cdn.hiyobi.me/data/{num}/{resp[int(page)]["name"]}'
     except:
@@ -198,10 +192,8 @@ async def 보기(ctx, num, page):
     embed = discord.Embed()
     embed.set_image(url=img)
 
-    try:
-        await waitMessage.edit(embed=embed)
-    except Exception as e:
-        await waitMessage.edit(embed=CreateEmbed.Error(e))
+    await waitMessage.edit(embed=embed)
+
 
 
 @bot.command()
