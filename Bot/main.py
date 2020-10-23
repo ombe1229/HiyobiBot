@@ -12,15 +12,15 @@ thumbnail = 'https://i.imgur.com/GKPAp4q.png'
 bot.remove_command('help')
 
 BASEURL = "https://api.koreanbots.dev"
-#token = os.environ['dbltoken']
+token = os.environ['dbltoken']
 serverCount = 21
 
 
 @bot.event
 async def on_ready():
-#    response = requests.post(f'{BASEURL}/bots/servers', headers={"token":token, "Content-Type": "application/json"}, json={"servers": serverCount})
+    response = requests.post(f'{BASEURL}/bots/servers', headers={"token":token, "Content-Type": "application/json"}, json={"servers": serverCount})
     print('봇 온라인.')
-#    print(response.json())
+    print(response.json())
     await bot.change_presence(status=discord.Status.online, activity=discord.Game(';명령어 | ombe#7777'))
 
 
