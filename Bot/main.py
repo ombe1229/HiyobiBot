@@ -13,7 +13,7 @@ bot.remove_command('help')
 
 BASEURL = "https://api.koreanbots.dev"
 token = os.environ['dbltoken']
-serverCount = 21
+serverCount = 23
 
 
 @bot.event
