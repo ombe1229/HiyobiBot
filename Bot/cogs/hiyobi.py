@@ -45,12 +45,14 @@ class Hiyobi(commands.Cog):
             if not tags:
                 tags.append('없음')
 
-            embed = discord.Embed(title=f'{title}', url=f'https://hiyobi.me/info/{num}', color=0xff0000)
+            embed = discord.Embed(
+                title=f'{title}', url=f'https://hiyobi.me/info/{num}', color=0xff0000)
             embed.set_thumbnail(url=f'http://cdn.hiyobi.me/tn/{num}.jpg')
             embed.add_field(name='작가', value=", ".join(artists), inline=False)
             embed.add_field(name='그룹', value=", ".join(groups), inline=False)
             embed.add_field(name='원작', value=", ".join(parody), inline=False)
-            embed.add_field(name='캐릭터', value=", ".join(characters), inline=False)
+            embed.add_field(name='캐릭터', value=", ".join(
+                characters), inline=False)
             embed.add_field(name='태그', value=", ".join(tags), inline=False)
 
             await waitMessage.edit(embed=embed)
@@ -62,7 +64,8 @@ class Hiyobi(commands.Cog):
             data = requests.get('https://api.hiyobi.me/list')
             resp = data.json()
 
-            embed = discord.Embed(title=':scroll: 히요비 최신 리스트', url='https://hiyobi.me/', color=0xff0000)
+            embed = discord.Embed(
+                title=':scroll: 히요비 최신 리스트', url='https://hiyobi.me/', color=0xff0000)
             embed.set_thumbnail(url=thumbnail)
 
             for i in range(9):
@@ -75,7 +78,8 @@ class Hiyobi(commands.Cog):
                 except:
                     artists = '없음'
 
-                embed.add_field(name=f'{title}', value=f'작가 : {artists} | 번호 : {id}', inline=False)
+                embed.add_field(
+                    name=f'{title}', value=f'작가 : {artists} | 번호 : {id}', inline=False)
 
             try:
                 await waitMessage.edit(embed=embed)
@@ -107,7 +111,8 @@ class Hiyobi(commands.Cog):
                 except:
                     artists = '없음'
 
-                embed.add_field(name=f'{title}', value=f'작가 : {artists} | 번호 : {id}', inline=False)
+                embed.add_field(
+                    name=f'{title}', value=f'작가 : {artists} | 번호 : {id}', inline=False)
 
             try:
                 await waitMessage.edit(embed=embed)
@@ -149,11 +154,13 @@ class Hiyobi(commands.Cog):
 
             waitMessage = await ctx.send(embed=Embeds.Wait)
 
-            data = requests.get(f'https://cdn.hiyobi.me/data/json/{str(num)}_list.json')
+            data = requests.get(f'https://cdn.hiyobi.me/json/{num}_list.json')
             resp = data.json()
+            page = int(page)
+            name = resp[page-1]["name"]
 
             try:
-                img = f'https://cdn.hiyobi.me/data/{num}/{resp[int(page)]["name"]}'
+                img = f'https://cdn.hiyobi.me/data/{num}/{name}'
             except:
                 await waitMessage.edit(embed=Embeds.WrongNum)
                 return None

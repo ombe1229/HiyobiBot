@@ -21,10 +21,10 @@ bot.cwd = cwd
 
 @bot.event
 async def on_ready():
-    requests.post(f'{BASEURL}/bots/servers', headers={"token":dblToken, "Content-Type": "application/json"}, json={"servers": serverCount})
+    requests.post(f'{BASEURL}/bots/servers', headers={"token": dblToken,
+                                                      "Content-Type": "application/json"}, json={"servers": serverCount})
     print('봇 온라인.')
     await bot.change_presence(status=discord.Status.online, activity=discord.Game(';명령어 | ombe#7777'))
-
 
 
 @bot.event
