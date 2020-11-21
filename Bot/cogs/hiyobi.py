@@ -68,7 +68,7 @@ class Hiyobi(commands.Cog):
                 title=':scroll: 히요비 최신 리스트', url='https://hiyobi.me/', color=0xff0000)
             embed.set_thumbnail(url=thumbnail)
 
-            for i in range(9):
+            for i in range(14):
                 id = resp['list'][i]['id']
                 title = resp['list'][i]['title']
                 if title == '':
@@ -101,7 +101,7 @@ class Hiyobi(commands.Cog):
                                   color=0xff0000)
             embed.set_thumbnail(url=thumbnail)
 
-            for i in range(9):
+            for i in range(14):
                 id = resp['list'][i]['id']
                 title = resp['list'][i]['title']
                 if title == '':
