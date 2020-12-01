@@ -78,8 +78,13 @@ class Hiyobi(commands.Cog):
                 except:
                     artists = '없음'
 
+                tags = [t['display'] for t in resp['list'][i]['tags']]
+                if not tags:
+                    tags.append('없음')
+                tag = ', '.join(tags)
+
                 embed.add_field(
-                    name=f'{title}', value=f'작가 : {artists} | 번호 : {id}', inline=False)
+                    name=f'{title}', value=f'작가 : {artists} | 번호 : {id} \n 태그 : {tag}', inline=False)
 
             try:
                 await waitMessage.edit(embed=embed)
@@ -111,8 +116,13 @@ class Hiyobi(commands.Cog):
                 except:
                     artists = '없음'
 
+                tags = [t['display'] for t in resp['list'][i]['tags']]
+                if not tags:
+                    tags.append('없음')
+                tag = ', '.join(tags)
+
                 embed.add_field(
-                    name=f'{title}', value=f'작가 : {artists} | 번호 : {id}', inline=False)
+                    name=f'{title}', value=f'작가 : {artists} | 번호 : {id} \n 태그 : {tag}', inline=False)
 
             try:
                 await waitMessage.edit(embed=embed)

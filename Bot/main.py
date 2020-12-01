@@ -11,7 +11,7 @@ token = os.environ['token']
 
 BASEURL = "https://api.koreanbots.dev"
 dblToken = os.environ['dbltoken']
-serverCount = 41
+serverCount = 43
 
 cwd = Path(__file__).parents[0]
 cwd = str(cwd)
@@ -27,7 +27,7 @@ async def on_ready():
     await bot.change_presence(status=discord.Status.online, activity=discord.Game(';명령어 | ombe#7777'))
 
 
-@bot.event
+@ bot.event
 async def on_message(message):
     if message.author.id == bot.user.id:
         return
