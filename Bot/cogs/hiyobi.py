@@ -130,7 +130,7 @@ class Hiyobi(commands.Cog):
                 await waitMessage.edit(embed=CreateEmbed.Error(e))
 
         @bot.command()
-        async def 검색(ctx, *tag):
+        async def 검색(ctx, *kword, page=1):
             waitMessage = await ctx.send(embed=Embeds.NotReady)
 
         @bot.command()
