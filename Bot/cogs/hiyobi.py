@@ -107,7 +107,7 @@ class Hiyobi(commands.Cog):
             embed.set_thumbnail(url=thumbnail)
 
             for i in range(14):
-                id = resp['list'][i]['id']
+                iid = resp['list'][i]['id']
                 title = resp['list'][i]['title']
                 if title == '':
                     title = '없음'
@@ -122,7 +122,7 @@ class Hiyobi(commands.Cog):
                 tag = ', '.join(tags)
 
                 embed.add_field(
-                    name=f'{title}', value=f'작가 : {artists} | 번호 : {id} \n 태그 : {tag}', inline=False)
+                    name=f'{title}', value=f'작가 : {artists} | 번호 : {iid} \n 태그 : {tag}', inline=False)
 
             try:
                 await waitMessage.edit(embed=embed)
