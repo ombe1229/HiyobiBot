@@ -9,7 +9,7 @@ class Util(commands.Cog):
 
         @bot.command()
         async def 청소(ctx, *num):
-            waitMessage = await ctx.send(embed=Embeds.NotReady)
+            await ctx.send(embed=Embeds.NotReady)
 
 
 def setup(bot):

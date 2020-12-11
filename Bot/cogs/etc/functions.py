@@ -1,9 +1,4 @@
 import discord
-from bs4 import BeautifulSoup
-from requests import Session, exceptions
-from queue import Queue
-from threading import Thread
-
 
 thumbnail = 'https://i.imgur.com/GKPAp4q.png'
 
