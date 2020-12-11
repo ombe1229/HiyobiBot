@@ -3,9 +3,11 @@ from discord.ext import commands
 import requests
 import os
 from pathlib import Path
+import sqlite3
 
 
-bot = commands.Bot(command_prefix=';')
+intents = discord.Intents.all()
+bot = commands.Bot(command_prefix=';', intents=intents)
 thumbnail = 'https://i.imgur.com/GKPAp4q.png'
 token = os.environ['token']
 
@@ -15,8 +17,10 @@ serverCount = 43
 
 cwd = Path(__file__).parents[0]
 cwd = str(cwd)
-
 bot.cwd = cwd
+
+
+conn = sqlite3.connect("")
 
 
 @bot.event
