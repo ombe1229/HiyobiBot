@@ -11,7 +11,7 @@ class Util(commands.Cog):
         self.bot = bot
 
         @bot.command()
-        @commands.has_permissions(administrator=True)
+        @commands.has_permissions(manage_messages=True)
         async def 청소(ctx, num):
             if int(num) < 1 or not num.isdigit():
                 await ctx.send(embed=Embeds.HowtoClear)
