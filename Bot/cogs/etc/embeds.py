@@ -16,7 +16,8 @@ class Embeds:
         name=';검색 K N', value='히요비에 K를 검색하여 K번째 페이지를 불러옵니다.', inline=False)
     Help.add_field(name=';표지 N', value='N번 망가의 표지를 보여줍니다.', inline=False)
     Help.add_field(name=';보기 N N2', value='N번 망가의 N2페이지를 불러옵니다.', inline=False)
-    Help.add_field(name=';청소 N', value='N개의 메세지를 삭제합니다.', inline=False)
+    Help.add_field(
+        name=';청소 N', value='N개의 메세지를 삭제합니다. 메세지 관리 권한이 있어야 사용 가능합니다.', inline=False)
     Help.add_field(name=';초대', value='HiyobiBot 초대 링크를 불러옵니다.', inline=False)
     Help.add_field(
         name=';지원', value='HiyobiBot 디스코드 서버 링크를 불러옵니다.', inline=False)
