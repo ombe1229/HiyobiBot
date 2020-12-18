@@ -128,6 +128,8 @@ class Hiyobi(commands.Cog):
             except Exception as e:
                 await waitMessage.edit(embed=CreateEmbed.Error(e))
 
+
+'''
         @bot.command()
         async def 검색(ctx, search):
             waitMessage = await ctx.send(embed=Embeds.Wait)
@@ -161,50 +163,50 @@ class Hiyobi(commands.Cog):
                     await waitMessage.edit(embed=embed)
                 except Exception as e:
                     await waitMessage.edit(embed=CreateEmbed.Error(e))
+'''
+  @bot.command()
+   async def 표지(ctx, num):
 
-        @bot.command()
-        async def 표지(ctx, num):
+        waitMessage = await ctx.send(embed=Embeds.Wait)
 
-            waitMessage = await ctx.send(embed=Embeds.Wait)
+        url = f'https://api.hiyobi.me/gallery/{num}'
+        response = requests.get(url).json()
 
-            url = f'https://api.hiyobi.me/gallery/{num}'
-            response = requests.get(url).json()
+        if response['title'] == '정보없음':
+            await waitMessage.edit(embed=Embeds.NoResult)
+            return None
 
-            if response['title'] == '정보없음':
-                await waitMessage.edit(embed=Embeds.NoResult)
-                return None
+        embed = discord.Embed()
+        embed.set_image(url=f'http://cdn.hiyobi.me/tn/{num}.jpg')
 
-            embed = discord.Embed()
-            embed.set_image(url=f'http://cdn.hiyobi.me/tn/{num}.jpg')
-
-            try:
-                await waitMessage.edit(embed=embed)
-            except Exception as e:
-                await waitMessage.edit(embed=CreateEmbed.Error(e))
-
-        @bot.command()
-        async def 보기(ctx, num, page):
-            if not page.isdigit():
-                await ctx.send(embed=Embeds.PlzInputNum)
-                return None
-
-            waitMessage = await ctx.send(embed=Embeds.Wait)
-
-            data = requests.get(f'https://cdn.hiyobi.me/json/{num}_list.json')
-            resp = data.json()
-            page = int(page)
-            name = resp[page-1]["name"]
-
-            try:
-                img = f'https://cdn.hiyobi.me/data/{num}/{name}'
-            except:
-                await waitMessage.edit(embed=Embeds.WrongNum)
-                return None
-
-            embed = discord.Embed()
-            embed.set_image(url=img)
-
+        try:
             await waitMessage.edit(embed=embed)
+        except Exception as e:
+            await waitMessage.edit(embed=CreateEmbed.Error(e))
+
+    @bot.command()
+    async def 보기(ctx, num, page):
+        if not page.isdigit():
+            await ctx.send(embed=Embeds.PlzInputNum)
+            return None
+
+        waitMessage = await ctx.send(embed=Embeds.Wait)
+
+        data = requests.get(f'https://cdn.hiyobi.me/json/{num}_list.json')
+        resp = data.json()
+        page = int(page)
+        name = resp[page-1]["name"]
+
+        try:
+            img = f'https://cdn.hiyobi.me/data/{num}/{name}'
+        except:
+            await waitMessage.edit(embed=Embeds.WrongNum)
+            return None
+
+        embed = discord.Embed()
+        embed.set_image(url=img)
+
+        await waitMessage.edit(embed=embed)
 
 
 def setup(bot):
