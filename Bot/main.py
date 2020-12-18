@@ -13,7 +13,7 @@ token = os.environ['token']
 
 BASEURL = "https://api.koreanbots.dev"
 dblToken = os.environ['dbltoken']
-serverCount = 43
+serverCount = 61
 
 cwd = Path(__file__).parents[0]
 cwd = str(cwd)

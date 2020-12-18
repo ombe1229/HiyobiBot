@@ -4,6 +4,8 @@ from discord.ext import commands
 import requests
 from .etc.functions import CreateEmbed
 
+CreateEmbed = CreateEmbed()
+
 thumbnail = 'https://i.imgur.com/GKPAp4q.png'
 
 
@@ -14,9 +16,6 @@ class Hiyobi(commands.Cog):
 
         @bot.command()
         async def 정보(ctx, num):
-            if not num.isdigit():
-                await ctx.send(embed=Embeds.PlzInputNum)
-                return None
 
             waitMessage = await ctx.send(embed=Embeds.Wait)
 
@@ -135,9 +134,6 @@ class Hiyobi(commands.Cog):
 
         @bot.command()
         async def 표지(ctx, num):
-            if not num.isdigit():
-                await ctx.send(embed=Embeds.PlzInputNum)
-                return None
 
             waitMessage = await ctx.send(embed=Embeds.Wait)
 
@@ -158,7 +154,7 @@ class Hiyobi(commands.Cog):
 
         @bot.command()
         async def 보기(ctx, num, page):
-            if not num.isdigit() or not page.isdigit():
+            if not page.isdigit():
                 await ctx.send(embed=Embeds.PlzInputNum)
                 return None
 

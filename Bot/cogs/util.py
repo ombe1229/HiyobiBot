@@ -1,5 +1,8 @@
 from discord.ext import commands
 from .etc.embeds import Embeds
+from .etc.functions import CreateEmbed
+
+CreateEmbed = CreateEmbed()
 
 
 class Util(commands.Cog):
@@ -8,8 +11,14 @@ class Util(commands.Cog):
         self.bot = bot
 
         @bot.command()
-        async def 청소(ctx, *num):
-            await ctx.send(embed=Embeds.NotReady)
+        @commands.has_permissions(administrator=True)
+        async def 청소(ctx, num):
+            if int(num) < 1 or not num.isdigit():
+                await ctx.send(embed=Embeds.HowtoClear)
+                return
+            num = int(num)+1
+            await ctx.channel.purge(limit=num)
+            await ctx.send(embed=CreateEmbed.Cleared(num-1))
 
 
 def setup(bot):
