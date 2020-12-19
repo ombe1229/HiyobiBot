@@ -148,7 +148,7 @@ class Hiyobi(commands.Cog):
                                   url=embedUrl, color=0xff0000)
             embed.set_thumbnail(url=thumbnail)
 
-            if resp['count'] == 0:
+            if resp['count'] == '0':
                 embed.add_field(name='검색 결과가 없습니다.')
                 await waitMessage.edit(embed=embed)
                 return
