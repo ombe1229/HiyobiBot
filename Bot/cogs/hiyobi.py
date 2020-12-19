@@ -129,6 +129,49 @@ class Hiyobi(commands.Cog):
                 await waitMessage.edit(embed=CreateEmbed.Error(e))
 
         @bot.command()
+        async def 검색(ctx, *kword):
+
+            waitMessage = await ctx.send(embed=Embeds.Wait)
+
+            search = [i for i in kword]
+            data = {"search": search, "paging": 1}
+            URL = "https://api.hiyobi.me/search"
+            try:
+                resp = requests.post(URL, data=data).json()
+            except Exception as e:
+                await waitMessage.edit(embed=CreateEmbed.Error(e))
+                return
+            kwords = '%7C'.join(kword)
+            embedUrl = f'https://hiyobi.me/search/{kwords}'
+
+            embed = discord.Embed(title=':mag: 검색 결과',
+                                  url=embedUrl, color=0xff0000)
+            embed.set_thumbnail(url=thumbnail)
+
+            for i in range(14):
+                iid = resp['list'][i]['id']
+                title = resp['list'][i]['title']
+                if title == '':
+                    title = '없음'
+                try:
+                    artists = resp['list'][i]['artists'][0]['display']
+                except:
+                    artists = '없음'
+
+                tags = [t['display'] for t in resp['list'][i]['tags']]
+                if not tags:
+                    tags.append('없음')
+                tag = ', '.join(tags)
+
+                embed.add_field(
+                    name=f'{title}', value=f'작가 : {artists} | 번호 : {iid} \n 태그 :{tag}', inline=False)
+
+            try:
+                await waitMessage.edit(embed=embed)
+            except Exception as e:
+                await waitMessage.edit(embed=CreateEmbed.Error(e))
+
+        @bot.command()
         async def 표지(ctx, num):
 
             waitMessage = await ctx.send(embed=Embeds.Wait)
