@@ -13,7 +13,7 @@ class Embeds:
     Help.add_field(
         name=';페이지 N', value='최신 망가 리스트 중 N번째 페이지를 불러옵니다.', inline=False)
     Help.add_field(
-        name=';검색 K N', value='히요비에 K를 검색하여 K번째 페이지를 불러옵니다.', inline=False)
+        name=';검색 K', value='히요비에 키워드를 검색하여 첫 번째 페이지를 불러옵니다.', inline=False)
     Help.add_field(name=';표지 N', value='N번 망가의 표지를 보여줍니다.', inline=False)
     Help.add_field(name=';보기 N N2', value='N번 망가의 N2페이지를 불러옵니다.', inline=False)
     Help.add_field(
