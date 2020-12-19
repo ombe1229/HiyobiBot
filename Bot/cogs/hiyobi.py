@@ -137,7 +137,7 @@ class Hiyobi(commands.Cog):
             data = {"search": search, "paging": 1}
             URL = "https://api.hiyobi.me/search"
             try:
-                resp = requests.post(URL, data=data).json()
+                resp = requests.post(URL, json=data).json()
             except Exception as e:
                 await waitMessage.edit(embed=CreateEmbed.Error(e))
                 return
