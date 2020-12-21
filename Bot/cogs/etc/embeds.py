@@ -9,7 +9,7 @@ class Embeds:
     Help = discord.Embed(title=':ticket: HiyobiBot 명령어 목록', color=0xababab)
     Help.set_thumbnail(url=thumbnail)
     Help.add_field(name=';정보 N', value='망가 정보를 불러옵니다.', inline=False)
-    Help.add_field(name=';최신', value='최신 망가 10개를 불러옵니다.', inline=False)
+    Help.add_field(name=';최신', value='최신 망가 15개를 불러옵니다.', inline=False)
     Help.add_field(
         name=';페이지 N', value='최신 망가 리스트 중 N번째 페이지를 불러옵니다.', inline=False)
     Help.add_field(
