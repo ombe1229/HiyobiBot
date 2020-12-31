@@ -1,8 +1,9 @@
 from .etc.embeds import Embeds
-import discord
 from discord.ext import commands
-import requests
 from .etc.functions import CreateEmbed
+import requests
+import discord
+import aiohttp
 
 CreateEmbed = CreateEmbed()
 
@@ -22,16 +23,16 @@ class Hiyobi(commands.Cog):
             url = f'https://api.hiyobi.me/gallery/{num}'
             response = requests.get(url).json()
 
-            if response['title'] == '정보없음':
+            if resp['title'] == '정보없음':
                 await waitMessage.edit(embed=Embeds.NoResult)
                 return None
 
-            title = response['title']
-            artists = [a['display'] for a in response['artists']]
-            groups = [g['display'] for g in response['groups']]
-            parody = [p['display'] for p in response['parodys']]
-            characters = [c['display'] for c in response['characters']]
-            tags = [t['display'] for t in response['tags']]
+            title = resp['title']
+            artists = [a['display'] for a in resp['artists']]
+            groups = [g['display'] for g in resp['groups']]
+            parody = [p['display'] for p in resp['parodys']]
+            characters = [c['display'] for c in resp['characters']]
+            tags = [t['display'] for t in resp['tags']]
 
             if not artists:
                 artists.append('없음')
@@ -153,7 +154,7 @@ class Hiyobi(commands.Cog):
                 await waitMessage.edit(embed=embed)
                 return
 
-            for i in range(14):
+            for i in range(resp['count']):
                 iid = resp['list'][i]['id']
                 title = resp['list'][i]['title']
                 if title == '':
