@@ -16,6 +16,7 @@ class Hiyobi(commands.Cog):
         self.bot = bot
 
         @bot.command()
+        @commands.is_nsfw()
         async def 정보(ctx, num):
 
             waitMessage = await ctx.send(embed=Embeds.Wait)
@@ -58,6 +59,7 @@ class Hiyobi(commands.Cog):
             await waitMessage.edit(embed=embed)
 
         @bot.command()
+        @commands.is_nsfw()
         async def 최신(ctx):
             waitMessage = await ctx.send(embed=Embeds.Wait)
 
@@ -92,6 +94,7 @@ class Hiyobi(commands.Cog):
                 await waitMessage.edit(embed=CreateEmbed.Error(e))
 
         @bot.command()
+        @commands.is_nsfw()
         async def 페이지(ctx, page):
             if not page.isdigit():
                 await ctx.send(embed=Embeds.PlzInputNum)
@@ -130,6 +133,7 @@ class Hiyobi(commands.Cog):
                 await waitMessage.edit(embed=CreateEmbed.Error(e))
 
         @bot.command()
+        @commands.is_nsfw()
         async def 검색(ctx, *kword):
 
             waitMessage = await ctx.send(embed=Embeds.Wait)
@@ -178,6 +182,7 @@ class Hiyobi(commands.Cog):
                 await waitMessage.edit(embed=CreateEmbed.Error(e))
 
         @bot.command()
+        @commands.is_nsfw()
         async def 표지(ctx, num):
 
             waitMessage = await ctx.send(embed=Embeds.Wait)
@@ -198,6 +203,7 @@ class Hiyobi(commands.Cog):
                 await waitMessage.edit(embed=CreateEmbed.Error(e))
 
         @bot.command()
+        @commands.is_nsfw()
         async def 보기(ctx, num, page):
             if not page.isdigit():
                 await ctx.send(embed=Embeds.PlzInputNum)
