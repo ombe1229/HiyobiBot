@@ -22,7 +22,7 @@ class Embeds:
     Help.add_field(
         name=';지원', value='HiyobiBot 디스코드 서버 링크를 불러옵니다.', inline=False)
     Help.add_field(name=':warning: 경고',
-                   value='히요비 관련 명령어는 "연령 제한 채널"에서만 작동합니다.', inline=False)
+                   value='모든 명령어는 "연령 제한 채널"이 아니어도 정상 작동합니다.', inline=False)
 
     Wait = discord.Embed(title=':file_folder: 정보를 불러오는 중입니다...',
                          description='잠시만 기다려주세요...', color=0xababab)
