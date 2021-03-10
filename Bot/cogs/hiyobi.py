@@ -21,7 +21,7 @@ class Hiyobi(commands.Cog):
             waitMessage = await ctx.send(embed=Embeds.Wait)
 
             url = f'https://api.hiyobi.me/gallery/{num}'
-            response = requests.get(url).json()
+            resp = requests.get(url).json()
 
             if resp['title'] == '정보없음':
                 await waitMessage.edit(embed=Embeds.NoResult)

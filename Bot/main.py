@@ -29,7 +29,7 @@ async def on_message(message):
 
 
 if __name__ == '__main__':
-    for file in os.listdir(cwd+'/cogs'):
+    for file in os.listdir(os.path.join(cwd, 'cogs')):
         if file.endswith('.py') and not file.startswith('_'):
             bot.load_extension(f'cogs.{file[:-3]}')
     bot.run(token)
