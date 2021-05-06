@@ -17,7 +17,7 @@ bot.cwd = cwd
 @bot.event
 async def on_ready():
     print('봇 온라인.')
-    await bot.change_presence(status=discord.Status.online, activity=discord.Game(';명령어 | ombe#3619'))
+    await bot.change_presence(status=discord.Status.online, activity=discord.Game('ㅂ'))
 
 
 @bot.event
